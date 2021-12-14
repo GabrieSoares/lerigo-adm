@@ -1,0 +1,83 @@
+<div class="container">
+    <h2>Novo Artigo</h2>
+    <p-panel header="IMAGEM">
+        <div class="p-grid">
+            <div *ngIf="hyperlink" class="p-col-8">
+                <a href="{{hyperlink}}" target="_blank">
+                    <img *ngIf="imagem" class="imgResponsive" src="{{imagem}}" style="max-width: 600px;">
+                    <img *ngIf="!imagem" class="imgResponsive" src="{{imagemTemplate}}" style="max-width: 600px;">
+                </a>
+            </div>
+            <div *ngIf="!hyperlink" class="p-col-8">
+                <img *ngIf="imagem" class="imgResponsive" src="{{imagem}}" style="max-width: 600px;">
+                <img *ngIf="!imagem" class="imgResponsive" src="{{imagemTemplate}}" style="max-width: 600px;">
+            </div>
+            <div class="p-col-4">
+                <div class="p-grid">
+                    <div class="p-sm-10 p-md-12 p-lg-12 p-fluid">
+                        <label>Imagem</label>
+                        <p-fileUpload mode="basic" name="file" accept="image/*"
+                            (uploadHandler)="uploadHandler($event, uploader)" [auto]="true" [customUpload]="true"
+                            chooseLabel="Upload" #uploader tooltipPosition="right"></p-fileUpload>
+                    </div>
+                    <div class="p-sm-10 p-md-12 p-lg-12 p-fluid">
+                        <label>Hyperlink</label>
+                        <input [(ngModel)]="hyperlink" pInputText>
+                    </div>
+                    <div class="p-sm-10 p-md-12 p-lg-12 p-fluid">
+                        <label>Texto Alternativo</label>
+                        <input [(ngModel)]="textoAlt" pInputText>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-panel>
+    <p-panel header="TEXTO">
+        <div class="p-grid">
+            <div class="p-col-6 p-as-center">
+                <div class="box">
+                    <p-editor [(ngModel)]="text" [style]="{'height':'200px'}">
+                        <p-header>
+
+                            <span class="ql-formats">
+                                <select class="ql-size"></select>
+                            </span>
+
+                            <span class="ql-formats">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-strike"></button>
+                            </span>
+
+                            <span class="ql-formats">
+                                <button class="ql-list" value="ordered"></button>
+                                <button class="ql-list" value="bullet"></button>
+                            </span>
+
+                            <span class="ql-formats">
+                                <select class="ql-align">
+                                    <option selected></option>
+                                    <option value="center"></option>
+                                    <option value="right"></option>
+                                    <option value="justify"></option>
+                                </select>
+                            </span>
+                        </p-header>
+                    </p-editor>
+                </div>
+            </div>
+        </div>
+    </p-panel>
+    <p-panel header="RODAPÉ">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label>Autor</label>
+                <input [(ngModel)]="autor" pInputText>
+            </div>
+        </div>
+    </p-panel>
+    <div>
+        <button class="button" pButton label="Gravar" icon="pi pi-save" iconPos="left" (click)="gravar()"></button>
+    </div>
+</div>
