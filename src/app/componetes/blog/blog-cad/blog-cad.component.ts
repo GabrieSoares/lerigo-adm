@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
+import { BlogService } from '../../blog.service';
 
 @Component({
   selector: 'app-blog-cad',
   templateUrl: './blog-cad.component.html',
-  styleUrls: ['./blog-cad.component.scss']
+  styleUrls: ['./blog-cad.component.scss'],
+  providers: [MessageService]
 })
 export class BlogCadComponent implements OnInit {
   text: any;
@@ -14,7 +18,11 @@ export class BlogCadComponent implements OnInit {
   imagemTemplate: any = "./assets/imgs/modelImg.png";
   autor: any = [];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private messageService: MessageService,
+    private blogService: BlogService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -35,12 +43,23 @@ export class BlogCadComponent implements OnInit {
   gravar() {
     let img = this.validarImg();
     const html = this.montarHTML();
-
+    const rodape = this.montarRodape();
     const ob = {
-      img,
-      html
+      img64: this.imagem,
+      hyperlink: this.hyperlink,
+      textoAlt: this.textoAlt,
+      imgHtml: img,
+      html,
+      rodape
     }
-    console.log(ob);
+
+    console.log(ob)
+    this.blogService.gravar(ob)
+      .then(resp => {
+        this.messageService.add({ severity: 'sucess', summary: 'sucess', detail: 'Gravado com sucesso!' });
+        this.router.navigate(["blog-list"]);
+      })
+      .catch(error => console.log(error));
   }
   validarImg() {
     let resposta = "";
@@ -50,15 +69,15 @@ export class BlogCadComponent implements OnInit {
       switch (this.hyperlink) {
         case '':
           resposta =
-            `<img class="ql-video ql-align-center" src="${this.imagem}"`+
+            `<img class="ql-video ql-align-center" src="${this.imagem}"` +
             `style="max-width: 600px;" ${txtAlt}>`;
           break;
         default:
           resposta =
-          `<a href="${this.hyperlink}" target="_blank">`+
-            `<img class="ql-video ql-align-center" src="${this.imagem}"`+
-              `style="max-width: 600px;" ${txtAlt}>`+
-          `</a>`
+            `<a href="${this.hyperlink}" target="_blank">` +
+            `<img class="ql-video ql-align-center" src="${this.imagem}"` +
+            `style="max-width: 600px;" ${txtAlt}>` +
+            `</a>`
           break;
       }
     }
@@ -67,17 +86,20 @@ export class BlogCadComponent implements OnInit {
 
   montarHTML() {
     let html: any;
-    let data = new Date();
-    let dataF = data.toLocaleDateString();
-    let rodape = 
-    `<p class="ql-align-justify"><span class="ql-size-large">Autor: ${this.autor}</span></p>`+
-    `<p class="ql-align-justify"><span class="ql-size-large">Publido em : ${dataF}</span></p>`;
-
     html = "</br>";
     html += this.text;
-    html += rodape;
-
     return html;
+  }
+
+  montarRodape() {
+    let data = new Date();
+    let dataF = data.toLocaleDateString();
+    let rodape =
+      `</br>` +
+      `<p class="ql-align-justify"><span class="ql-size-large">Autor: ${this.autor}</span></p>` +
+      `<p class="ql-align-justify"><span class="ql-size-large">Publido em : ${dataF}</span></p>`;
+
+    return rodape;
   }
 
 }

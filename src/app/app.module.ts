@@ -14,7 +14,7 @@ import { BlogModule } from './componetes/blog/blog.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-
+    
     BlogModule
   ],
   providers: [],
