@@ -14,4 +14,23 @@ export class BlogService {
     return this.http.post<any>(this.urlBlog, blog)
       .toPromise();
   }
+
+  listarTodos(status: any) {
+    let op: any = { header: {}, params: {} };
+    op.params['status'] = status == 1 ? 1 : 0;
+
+    return this.http.get<any>(`${this.urlBlog}s`, op)
+      .toPromise();
+  }
+
+  listarPost(id: number) {
+    return this.http.get<any>(this.urlBlog + '/' +id)
+      .toPromise();
+  }
+
+  alterarStatus(status: any) {
+    status = status == 1 ? 2 : 1;
+    return this.http.post<any>(this.urlBlog, status)
+      .toPromise();
+  }
 }

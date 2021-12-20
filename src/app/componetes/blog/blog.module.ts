@@ -11,6 +11,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import {InputTextModule} from 'primeng/inputtext';
 import {TableModule} from 'primeng/table';
 import {ToolbarModule} from 'primeng/toolbar';
+import {TooltipModule} from 'primeng/tooltip';
 
 import { BlogCadComponent } from './blog-cad/blog-cad.component';
 import { BlogRoutingModule } from './blog-routing.module';
@@ -34,6 +35,7 @@ import { BlogListComponent } from './blog-list/blog-list.component';
     FileUploadModule,
     TableModule,
     ToolbarModule,
+    TooltipModule,
 
     BlogRoutingModule
   ]

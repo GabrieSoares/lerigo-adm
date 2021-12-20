@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Novo Artigo</h2>
+    <h2>{{editando ? 'Editar' : 'Novo'}} Post</h2>
     <p-panel header="IMAGEM">
         <div class="p-grid">
             <div *ngIf="hyperlink" class="p-col-8">
@@ -79,5 +79,7 @@
     </p-panel>
     <div>
         <button class="button" pButton label="Gravar" icon="pi pi-save" iconPos="left" (click)="gravar()"></button>
+        <button class="button p-button-danger" pButton label="Cancelar" icon="pi pi-times-circle" iconPos="left"
+            (click)="cancelar()" style="margin-left: 2pt;"></button>
     </div>
 </div>

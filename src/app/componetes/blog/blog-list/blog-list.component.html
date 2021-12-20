@@ -1,53 +1,43 @@
 <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
-        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+        <button pButton pRipple label="Nova Postagem" icon="pi pi-plus" class="p-button-success p-mr-2"
             (click)="novoPost()"></button>
     </ng-template>
 
 </p-toolbar>
 
-<p-table #dt [value]="posts" [rows]="10" [paginator]="true" responsiveLayout="scroll"
-    [(selection)]="selectedPost" [rowHover]="true" dataKey="id" [showCurrentPageReport]="true">
+<p-table #dt [value]="posts" [rows]="5" [paginator]="true" responsiveLayout="scroll">
     <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-            <h5 class="p-m-0">Gerenciar Posts</h5>
+            <h3 class="p-m-0">Gerenciar Posts</h3>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon>
-            </th>
+            <th>Id</th>
             <th>Image</th>
-            <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon>
-            </th>
-            <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
-            </th>
-            <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon>
-            </th>
-            <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
-            </th>
-            <th></th>
+            <th>Publicaçâo</th>
+            <th>Status</th>
+            <th style="width: 10%;"></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-post>
         <tr>
-            <td>{{post.name}}</td>
-            <td><img [src]="'assets/showcase/images/demo/product/' + post.image" [alt]="post.name" width="100"
-                    class="p-shadow-4" /></td>
-            <td>{{post.price | currency:'USD'}}</td>
-            <td>{{post.category}}</td>
+            <td>{{post.id}}</td>
+            <td><img [src]="post.imagem_base64" [alt]="post.name" width="50" class="p-shadow-4" /></td>
+            <td>{{post.data_publicacao | date:'dd/MM/yyyy'}}</td>
             <td>
-                adasda
+                <a href="javascript:;" class="link-personalizado" (click)="controlarAtivo(post)"
+                    [pTooltip]="post.ativo == '1' ? 'Ativar' : 'Desativar'" tooltipPosition="top">
+                    {{ post.ativo == '1' ? 'Inativo' : 'Ativo' }}
+                </a>
             </td>
-            <td><span
-                    [class]="'product-badge status-' + (post.inventoryStatus ? post.inventoryStatus.toLowerCase() : '')">{{post.inventoryStatus}}</span>
-            </td>
-            <td>
+            <td style="width: 10%;">
                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
                     (click)="editarPost(post)"></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                    (click)="excluirPost(post)"></button>
             </td>
         </tr>
     </ng-template>
 </p-table>
+
+<button class="button" pButton label="Voltar" (click)="voltar()"></button>
