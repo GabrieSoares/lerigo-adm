@@ -1,1 +1,36 @@
-<p>equip-cad works!</p>
+<div class="container">
+    <h2>{{editando ? 'Editar' : 'Novo'}} Colaborador</h2>
+    <div class="p-grid">
+        <div class="p-col-6 p-fluid">
+            <label>Nome</label>
+            <input pInputText type="text" name="nome" [(ngModel)]="colaborador.nome" #nome="ngModel" />
+        </div>
+        <div class="p-col-6 p-fluid">
+            <label>Função</label>
+            <input pInputText type="text" name="funcao" [(ngModel)]="colaborador.funcao" #funcao="ngModel" />
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label>Foto</label>
+                <p-fileUpload mode="basic" name="foto" accept="image/*"
+                    (uploadHandler)="uploadHandler($event, uploader)" [auto]="true" [customUpload]="true"
+                    chooseLabel="Upload" #uploader tooltipPosition="right">
+                </p-fileUpload>
+            </div>
+            <div class="p-field p-col" style="margin-top: 1em;">
+                <img *ngIf="colaborador.foto" class="imgResponsive" src="{{colaborador.foto}}"
+                    style="max-width: 300px;">
+            </div>
+        </div>
+        <div class="p-col-6 p-fluid">
+            <label>Descricao</label>
+            <textarea pInputTextarea type="text" name="descricao" [(ngModel)]="colaborador.descricao"
+                #descricao="ngModel"></textarea>
+        </div>
+    </div>
+    <div style="margin-top: 1em;">
+        <button class="button" pButton label="Gravar" icon="pi pi-save" iconPos="left" (click)="gravar()"></button>
+        <button class="button p-button-danger" pButton label="Cancelar" icon="pi pi-times-circle" iconPos="left"
+            (click)="cancelar()" style="margin-left: 2pt;"></button>
+    </div>
+</div>

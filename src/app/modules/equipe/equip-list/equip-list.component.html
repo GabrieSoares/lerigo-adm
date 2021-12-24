@@ -1,1 +1,43 @@
-<p>equip-list works!</p>
+<p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="Novo Colaborador" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="novoColab()"></button>
+    </ng-template>
+
+</p-toolbar>
+
+<p-table #dt [value]="colaboladores" [rows]="5" [paginator]="true" responsiveLayout="scroll">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            <h3 class="p-m-0">Gerenciar Colaboradores</h3>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 10%;">Id</th>
+            <th style="width: 30%;">Nome</th>
+            <th>Image</th>
+            <th>Status</th>
+            <th style="width: 10%;"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-colab>
+        <tr>
+            <td style="width: 10%;">{{colab.id}}</td>
+            <td style="width: 30%;">{{colab.nome}}</td>
+            <td><img [src]="colab.foto" [alt]="colab.name" width="50" class="p-shadow-4" /></td>
+            <td>
+                <a href="javascript:;" class="link-personalizado" (click)="controlarAtivo(colab)"
+                    [pTooltip]="colab.ativo == '1' ? 'Ativar' : 'Desativar'" tooltipPosition="top">
+                    {{ colab.ativo == '1' ? 'Inativo' : 'Ativo' }}
+                </a>
+            </td>
+            <td style="width: 10%;">
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                    (click)="editarColaborador(colab)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<button class="button" pButton label="Voltar" (click)="voltar()"></button>
