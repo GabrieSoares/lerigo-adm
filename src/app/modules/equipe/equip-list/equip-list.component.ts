@@ -23,11 +23,11 @@ export class EquipListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listarTodos(0);
+    this.listarTodos();
   }
 
-  async listarTodos(status: number) {
-    await this.equipService.listarTodos(status)
+  async listarTodos() {
+    await this.equipService.listarTodos()
       .then(rs => {
         this.colaboladores = rs;
       })
@@ -44,10 +44,10 @@ export class EquipListComponent implements OnInit {
   }
 
   controlarAtivo(colaborador: any) {
-    this.equipService.alterarStatus(colaborador.status)
+    this.equipService.alterarStatus(colaborador.id)
       .then(rs => {
         this.colaboladores = rs;
-        this.listarTodos(0);
+        this.listarTodos();
       })
       .catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível alterar o status!' }));
   }

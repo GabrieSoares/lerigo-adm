@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BlogModule } from './modules/blog/blog.module';
 import { EquipeModule } from './modules/equipe/equipe.module';
+import { LoginModule } from './modules/login/login.module';
+import { LoginService } from './modules/login/login.service';
 
 
 @NgModule({
@@ -18,9 +20,12 @@ import { EquipeModule } from './modules/equipe/equipe.module';
     AppRoutingModule,
     
     BlogModule,
-    EquipeModule
+    EquipeModule,
+    LoginModule
   ],
-  providers: [],
+  providers: [
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

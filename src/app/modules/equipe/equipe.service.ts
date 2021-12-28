@@ -17,11 +17,8 @@ export class EquipeService {
       .toPromise();
   }
 
-  listarTodos(status: any) {
-    let op: any = { header: {}, params: {} };
-    op.params['status'] = status == 1 ? 1 : 0;
-
-    return this.http.get<any>(`${this.urlColab}es`, op)
+  listarTodos() {
+    return this.http.get<any>(`${this.urlColab}es`)
       .toPromise();
   }
 
@@ -30,9 +27,9 @@ export class EquipeService {
       .toPromise();
   }
 
-  alterarStatus(status: any) {
-    status = status == 1 ? 2 : 1;
-    return this.http.post<any>(this.urlColab, status)
+  alterarStatus(codigo: any) {
+    let ob = { params: { codigo } }
+    return this.http.put<any>(this.urlColab, {}, ob)
       .toPromise();
   }
 }

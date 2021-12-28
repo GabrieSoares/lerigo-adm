@@ -28,8 +28,8 @@
             <td><img [src]="colab.foto" [alt]="colab.name" width="50" class="p-shadow-4" /></td>
             <td>
                 <a href="javascript:;" class="link-personalizado" (click)="controlarAtivo(colab)"
-                    [pTooltip]="colab.ativo == '1' ? 'Ativar' : 'Desativar'" tooltipPosition="top">
-                    {{ colab.ativo == '1' ? 'Inativo' : 'Ativo' }}
+                    [pTooltip]="colab.status == '1' ? 'Ativar' : 'Desativar'" tooltipPosition="top">
+                    {{ colab.status == '1' ? 'Inativo' : 'Ativo' }}
                 </a>
             </td>
             <td style="width: 10%;">
