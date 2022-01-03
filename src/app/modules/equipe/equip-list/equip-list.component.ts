@@ -53,7 +53,7 @@ export class EquipListComponent implements OnInit {
   }
 
   voltar() {
-    this.router.navigate([""]);
+    this.router.navigate(["/controle"]);
   }
 
 }

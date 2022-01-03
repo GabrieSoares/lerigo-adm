@@ -52,7 +52,7 @@ export class BlogListComponent implements OnInit {
   }
 
   voltar() {
-    this.router.navigate([""]);
+    this.router.navigate(["/controle"]);
   }
 
 }

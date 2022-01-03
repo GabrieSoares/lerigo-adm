@@ -29,6 +29,6 @@ export class LoginComponent implements OnInit {
       })
       .catch(erro => console.log('erro:', erro));
       this.loginService.setUserLogado(true);
-      this.router.navigate(['/equipe-list']);
+      this.router.navigate(['/controle']);
   }
 }
