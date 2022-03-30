@@ -1,0 +1,63 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { MessageService } from 'primeng/api';
+
+import { TipoEventoService } from '../tipo-evento.service';
+
+
+@Component({
+  selector: 'app-tipo-cad',
+  templateUrl: './tipo-cad.component.html',
+  styleUrls: ['./tipo-cad.component.scss'],
+  providers: [MessageService]
+})
+export class TipoCadComponent implements OnInit {
+  editando = false;
+  tipo: any = [];
+
+  constructor(
+    private TpEventoSvc: TipoEventoService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private messageService: MessageService,
+
+  ) { }
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.params['id'];
+    if (id) {
+      this.editando = true;
+      this.carregarTipo(id);
+    }
+  }
+
+  gravar() {
+    if (!this.tipo.id) {
+      this.tipo.id = '';
+      this.tipo.status = 0;
+    }
+
+    this.TpEventoSvc.gravar(this.tipo)
+      .then(() => {
+        this.messageService.add({ severity: 'sucess', summary: 'sucess', detail: 'Gravado com sucesso!' });
+        this.router.navigate(["tipo-evento-list"]);
+      })
+      .catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível gravar os dados!' }));
+
+  }
+
+  cancelar() {
+    this.router.navigate(['tipo-evento-list'])
+  }
+
+
+  carregarTipo(id: number) {
+    this.TpEventoSvc.listarTipoEvento(id)
+      .then(rs => {
+        this.tipo = rs;
+      })
+      .catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar os dados!' }));
+  }
+
+}

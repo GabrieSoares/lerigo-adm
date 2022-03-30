@@ -17,7 +17,9 @@ export class ControleComponent implements OnInit {
   ngOnInit(): void {
     this.opcoes = [
       { titulo: 'Gerenciar Postagens', rota: 'blog-list' },
-      { titulo: 'Gerenciar Equipe', rota: 'equipe-list' }
+      { titulo: 'Gerenciar Equipe', rota: 'equipe-list' },
+      { titulo: 'Gerenciar Tipos de Espaço', rota: 'tipo-espaco-list' },
+      { titulo: 'Gerenciar Tipos de Evento', rota: 'tipo-evento-list' }
     ];
   }
 

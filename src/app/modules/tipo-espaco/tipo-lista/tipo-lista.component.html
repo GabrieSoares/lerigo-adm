@@ -1,0 +1,41 @@
+<p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="Novo Tipo de Espaço" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="novoTipo()"></button>
+    </ng-template>
+
+</p-toolbar>
+
+<p-table #dt [value]="tpsEspaco" [rows]="5" [paginator]="true" responsiveLayout="scroll">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            <h3 class="p-m-0">Gerenciar Tipos de Espaço</h3>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 10%;">Id</th>
+            <th style="width: 50%;">Descricao</th>
+            <th>Status</th>
+            <th style="width: 10%;"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tp>
+        <tr>
+            <td style="width: 10%;">{{tp.id}}</td>
+            <td style="width: 50%;">{{tp.descricao}}</td>
+            <td>
+                <a href="javascript:;" class="link-personalizado" (click)="controlarAtivo(tp)"
+                    [pTooltip]="tp.status == '1' ? 'Ativar' : 'Desativar'" tooltipPosition="top">
+                    {{ tp.status == '1' ? 'Inativo' : 'Ativo' }}
+                </a>
+            </td>
+            <td style="width: 10%;">
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                    (click)="editarTpEspaco(tp)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<button class="button" pButton label="Voltar" (click)="voltar()"></button>
