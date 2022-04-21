@@ -32,7 +32,7 @@ export class TipoCadComponent implements OnInit {
   gravar() {
     if (!this.tipo.id) {
       this.tipo.id = '';
-      this.tipo.status = 0;
+      this.tipo.status = 'A';
     }
 
     this.TpEspacoSvc.gravar(this.tipo)

@@ -26,11 +26,11 @@ export class TipoListaComponent implements OnInit {
   }
 
   async listarTodos() {
-    //await this.equipService.listarTodos()
-      //.then(rs => {
-        //this.colaboladores = rs;
-      //})
-      //.catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar os dados!' }));
+    await this.tpEspacoSvc.listarTodos()
+      .then(rs => {
+        this.tpsEspaco = rs;
+      })
+      .catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar os dados!' }));
   }
 
   novoTipo() {
@@ -38,16 +38,16 @@ export class TipoListaComponent implements OnInit {
   }
 
   editarTpEspaco(tpEspaco: any) {
-    this.router.navigate(["equipe-cad/" + tpEspaco.id]);
+    this.router.navigate(["tipo-espaco-cad/" + tpEspaco.id]);
   }
 
   controlarAtivo(tpEspaco: any) {
-    // this.equipService.alterarStatus(colaborador.id)
-    //   .then(rs => {
-    //     this.colaboladores = rs;
-    //     this.listarTodos();
-    //   })
-    //   .catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível alterar o status!' }));
+    tpEspaco.status = tpEspaco.status == 'A' ? 'N' : 'A';
+    this.tpEspacoSvc.gravar(tpEspaco)
+      .then(() => {
+        this.listarTodos();
+      })
+      .catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível alterar o status!' }));
   }
 
   voltar() {

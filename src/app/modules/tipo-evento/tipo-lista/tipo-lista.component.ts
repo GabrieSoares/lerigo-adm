@@ -13,7 +13,7 @@ import { TipoEventoService } from '../tipo-evento.service';
 })
 export class TipoListaComponent implements OnInit {
 
-  tpsEspaco: any = [];
+  tpsEvento: any = [];
 
   constructor(
     public tpEventoSvc: TipoEventoService,
@@ -26,11 +26,11 @@ export class TipoListaComponent implements OnInit {
   }
 
   async listarTodos() {
-    //await this.equipService.listarTodos()
-      //.then(rs => {
-        //this.colaboladores = rs;
-      //})
-      //.catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar os dados!' }));
+    await this.tpEventoSvc.listarTodos()
+      .then(rs => {
+        this.tpsEvento = rs;
+      })
+      .catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar os dados!' }));
   }
 
   novoTipo() {
@@ -38,16 +38,17 @@ export class TipoListaComponent implements OnInit {
   }
 
   editarTpEspaco(tpEvento: any) {
-    this.router.navigate(["equipe-cad/" + tpEvento.id]);
+    this.router.navigate(["tipo-evento-cad/" + tpEvento.id]);
   }
 
   controlarAtivo(tpEvento: any) {
-    // this.equipService.alterarStatus(colaborador.id)
-    //   .then(rs => {
-    //     this.colaboladores = rs;
-    //     this.listarTodos();
-    //   })
-    //   .catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível alterar o status!' }));
+    console.log(tpEvento);
+    tpEvento.status = tpEvento.status == "A" ? "N" : "A";
+    this.tpEventoSvc.gravar(tpEvento)
+      .then(() => {
+        this.listarTodos();
+      })
+      .catch(error => this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível alterar o status!' }));
   }
 
   voltar() {

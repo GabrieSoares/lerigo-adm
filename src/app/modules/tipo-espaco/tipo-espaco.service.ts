@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AppGlobalsService } from 'src/app/shared/global/app-globals.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -7,28 +8,32 @@ import { environment } from 'src/environments/environment';
 })
 export class TipoEspacoService {
 
-  urlTipo = `${environment.urlApi}tipoEspaco`;
+  urlTipo = `${environment.urlApi}geral/espaco/tipo`;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private appService: AppGlobalsService
+  ) { }
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'bearer ' + this.appService.authorization
+    })
+  };
 
   gravar(tipoEspaco: any) {
-    return this.http.post<any>(this.urlTipo, Object.assign({}, tipoEspaco))
+    return this.http.post<any>(this.urlTipo, Object.assign({}, tipoEspaco), this.httpOptions)
       .toPromise();
   }
 
   listarTodos() {
-    return this.http.get<any>(`${this.urlTipo}es`)
+    return this.http.get<any>(`${this.urlTipo}s`, this.httpOptions)
       .toPromise();
   }
 
   listarTipoEspaco(id: any) {
-    return this.http.get<any>(this.urlTipo + '/' + id)
-      .toPromise();
-  }
-
-  alterarStatus(codigo: any) {
-    let ob = { params: { codigo } }
-    return this.http.put<any>(this.urlTipo, {}, ob)
+    return this.http.get<any>(this.urlTipo + '/' + id, this.httpOptions)
       .toPromise();
   }
 }

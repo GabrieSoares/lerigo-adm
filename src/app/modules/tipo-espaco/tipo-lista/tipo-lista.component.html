@@ -26,8 +26,8 @@
             <td style="width: 50%;">{{tp.descricao}}</td>
             <td>
                 <a href="javascript:;" class="link-personalizado" (click)="controlarAtivo(tp)"
-                    [pTooltip]="tp.status == '1' ? 'Ativar' : 'Desativar'" tooltipPosition="top">
-                    {{ tp.status == '1' ? 'Inativo' : 'Ativo' }}
+                    [pTooltip]="tp.status == 'N' ? 'Ativar' : 'Desativar'" tooltipPosition="top">
+                    {{ tp.status == 'N' ? 'Inativo' : 'Ativo' }}
                 </a>
             </td>
             <td style="width: 10%;">

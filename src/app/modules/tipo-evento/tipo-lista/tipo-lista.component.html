@@ -1,15 +1,15 @@
 <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
-        <button pButton pRipple label="Novo Tipo de Espaço" icon="pi pi-plus" class="p-button-success p-mr-2"
+        <button pButton pRipple label="Novo Tipo de Evento" icon="pi pi-plus" class="p-button-success p-mr-2"
             (click)="novoTipo()"></button>
     </ng-template>
 
 </p-toolbar>
 
-<p-table #dt [value]="tpsEspaco" [rows]="5" [paginator]="true" responsiveLayout="scroll">
+<p-table #dt [value]="tpsEvento" [rows]="5" [paginator]="true" responsiveLayout="scroll">
     <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-            <h3 class="p-m-0">Gerenciar Tipos de Espaço</h3>
+            <h3 class="p-m-0">Gerenciar Tipos de Evento</h3>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -26,8 +26,8 @@
             <td style="width: 50%;">{{tp.descricao}}</td>
             <td>
                 <a href="javascript:;" class="link-personalizado" (click)="controlarAtivo(tp)"
-                    [pTooltip]="tp.status == '1' ? 'Ativar' : 'Desativar'" tooltipPosition="top">
-                    {{ tp.status == '1' ? 'Inativo' : 'Ativo' }}
+                    [pTooltip]="tp.status == 'N' ? 'Ativar' : 'Desativar'" tooltipPosition="top">
+                    {{ tp.status == 'N' ? 'Inativo' : 'Ativo' }}
                 </a>
             </td>
             <td style="width: 10%;">
